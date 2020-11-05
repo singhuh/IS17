@@ -1,0 +1,51 @@
+﻿@model IS17.Models.Interview
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Interview</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InterviewCompany)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InterviewCompany)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InterviewDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InterviewDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Offer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Offer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentAlum.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentAlum.LastName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.InterviewId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

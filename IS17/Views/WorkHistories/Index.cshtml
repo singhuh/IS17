@@ -1,0 +1,129 @@
+﻿@model IEnumerable<IS17.Models.WorkHistory>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Work History List</h2>
+
+<p>
+	@Html.ActionLink("Add New", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-info btn-justified ", @role = "button" })
+</p>
+
+<p>
+	@using (Html.BeginForm("Index", "WorkHistories", FormMethod.Get))
+	{
+		<b>Search By:</b>
+		@Html.RadioButton("searchBy", "CompanyName", true) <text>Company Name</text>
+		@Html.RadioButton("searchBy", "TitleName") <text>Title Name</text>
+		<br />
+		@Html.TextBox("search")<input type="submit" value="Search" />
+	}
+</p>
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.LastName)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.CompanyName)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.TitleName)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.StartDate)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.EndDate)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.FTE)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Compensation)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Company.CompanyName)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.StudentAlum.LastName)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Title.TitleName)
+		</th>
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.LastName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CompanyName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.TitleName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.StartDate)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.EndDate)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.FTE)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Compensation)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Company.CompanyName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.StudentAlum.LastName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Title.TitleName)
+			</td>
+			<td>
+				@Html.ActionLink("Edit", "Edit", new { id = item.WorkHistoryId }) |
+				@Html.ActionLink("Details", "Details", new { id = item.WorkHistoryId }) |
+				@Html.ActionLink("Delete", "Delete", new { id = item.WorkHistoryId })
+			</td>
+		</tr>
+	}
+
+</table>
+
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+
+	@Scripts.Render("~/bundles/jqueryui")
+	@Styles.Render("~/Content/cssjqryUi")
+	<script type="text/javascript">
+        // #clearDates is a button to clear the datepickers
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                setDate: null,
+                showButtonPanel: true,
+                closeText: 'Clear',
+                onClose: function (dateText, obj) {
+                    if ($(window.event.srcElement).hasClass('ui-datepicker-close'))
+                        $("#txtCalendar").val('');
+                },
+                dateFormat: "dd/M/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0",
+
+            });
+        });
+	</script>
+
+}

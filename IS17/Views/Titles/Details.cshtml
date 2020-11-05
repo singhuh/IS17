@@ -1,0 +1,27 @@
+﻿@model IS17.Models.Title
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Title</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TitleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TitleName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TitleId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

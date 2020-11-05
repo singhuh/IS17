@@ -1,0 +1,93 @@
+﻿@model IEnumerable<IS17.Models.Interview>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Interview List</h2>
+
+<p>
+	@Html.ActionLink("Add New", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-info btn-justified ", @role = "button" })
+</p>
+
+<p>
+	@using (Html.BeginForm("Index", "Interviews", FormMethod.Get))
+	{
+		<b>Search By:</b><br />
+		@Html.RadioButton("searchBy", "InterviewCompany", true) <text>Company Name</text>
+		@Html.RadioButton("searchBy", "InterviewDate", true) <text>Interview Date</text>
+		<br />
+		@Html.TextBox("search")<input type="submit" value="Search" />
+	}
+</p>
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.InterviewCompany)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.InterviewDate)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Offer)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.StudentAlum.LastName)
+		</th>
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.InterviewCompany)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.InterviewDate)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Offer)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.StudentAlum.LastName)
+			</td>
+			<td>
+				@Html.ActionLink("Edit", "Edit", new { id = item.InterviewId }) |
+				@Html.ActionLink("Details", "Details", new { id = item.InterviewId }) |
+				@Html.ActionLink("Delete", "Delete", new { id = item.InterviewId })
+			</td>
+		</tr>
+	}
+
+</table>
+
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+
+	@Scripts.Render("~/bundles/jqueryui")
+	@Styles.Render("~/Content/cssjqryUi")
+	<script type="text/javascript">
+        // #clearDates is a button to clear the datepickers
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                setDate: null,
+                showButtonPanel: true,
+                closeText: 'Clear',
+                onClose: function (dateText, obj) {
+                    if ($(window.event.srcElement).hasClass('ui-datepicker-close'))
+                        $("#txtCalendar").val('');
+                },
+                dateFormat: "dd/M/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0",
+
+            });
+        });
+	</script>
+
+}
